@@ -1,10 +1,14 @@
 package utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import algortimos.Grupo;
 
 
 public abstract class Arquivo {
@@ -39,6 +43,24 @@ public abstract class Arquivo {
 			}
 		}
 		return base;
+	}
+	public static void escrever(ArrayList<Grupo> grupos) {
+		try {
+		
+			FileWriter writer = new FileWriter("EscolasSaida.txt", false);
+			for(int k = 0; k < grupos.size(); k++) {
+				for (int i = 0; i < grupos.get(k).getElementos().size(); i++) {
+					writer.write("Grupo" + (k+1) + " ");
+					for(int j = 0; j < grupos.get(k).getElementos().get(i).length;j++){
+						writer.write( String.valueOf(grupos.get(k).getElementos().get(i)[j]) + ",");
+					}
+					writer.write("\n");
+				}
+			}
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
