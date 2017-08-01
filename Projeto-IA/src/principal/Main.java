@@ -10,5 +10,4 @@ public class Main {
 		Arquivo.escrever(calculo.agrupar(4));
 		System.out.println("Done!");
 	}
-
 }

@@ -21,11 +21,17 @@ public class Distancias {
 	}
 	private ArrayList<Grupo> gerarGrupos(int k, ArrayList<Integer[]> elementos){
 		Random rand = new Random();
+		ArrayList<Integer> escolhidos = new ArrayList<Integer>(); 
 		ArrayList<Grupo> resultado = new ArrayList<Grupo>();
+		
 		for(int i = 0; i < k;i++){	
-			resultado.add(new Grupo(
-					 this.convert(elementos.get(rand.nextInt(elementos.size())))
-					));
+			int aleatorio = 0;
+			do{
+				aleatorio = rand.nextInt(elementos.size());
+			}while(escolhidos.contains(aleatorio));
+			
+			resultado.add(new Grupo(this.convert(elementos.get(aleatorio))));
+			escolhidos.add(aleatorio);
 		}
 		return resultado;
 	}
@@ -33,7 +39,7 @@ public class Distancias {
 		for(Grupo g: grupos)
 			g.getElementos().clear();
 		for(int i = 0; i< elementos.size();i++){		
-			double menorDistancia = 2000000;
+			double menorDistancia = 2000;
 			int indexMenor = 0;
 			for(int j = 0;j <grupos.size();j++){
 				double distancia = euclidiana(elementos.get(i),grupos.get(j).getCentroide());
@@ -50,6 +56,13 @@ public class Distancias {
 		int resultado = 0;
 		for(int i = 0; i< e1.length;i++){
 			resultado +=  Math.pow((e1[i] - e2[i]),2);
+		}
+		return Math.sqrt(resultado);
+	}
+	private double manhatam(Integer[] e1,Double[] e2){
+		int resultado = 0;
+		for(int i = 0; i< e1.length;i++){
+			resultado +=  Math.abs(e1[i]) - Math.abs(e2[i]);
 		}
 		return Math.sqrt(resultado);
 	}

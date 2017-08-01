@@ -20,7 +20,7 @@ public abstract class Arquivo {
 		FileReader fr = null;
 		
 		try{
-			fr = new FileReader("src/entradas/escolas.txt");
+			fr = new FileReader("src/arquivos/escolas.txt");
 			br = new BufferedReader(fr);
 			String currentLine;
 
@@ -47,7 +47,7 @@ public abstract class Arquivo {
 	public static void escrever(ArrayList<Grupo> grupos) {
 		try {
 		
-			FileWriter writer = new FileWriter("EscolasSaida.txt", false);
+			FileWriter writer = new FileWriter("src/arquivos/escolasSaida.txt", false);
 			for(int k = 0; k < grupos.size(); k++) {
 				for (int i = 0; i < grupos.get(k).getElementos().size(); i++) {
 					writer.write("Grupo" + (k+1) + " ");

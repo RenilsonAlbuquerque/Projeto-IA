@@ -1,7 +1,6 @@
 package algortimos;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Grupo {
 	
@@ -31,7 +30,12 @@ public class Grupo {
 		this.centroide = centroide;
 	}
 	public boolean convergenciaParcial(){
-		return Arrays.equals(this.centroide, this.centroideAnterior);
+		for(int i = 0; i< this.centroide.length;i++){
+			double diferenca = (centroide[i] - centroideAnterior[i]);
+			if(!(diferenca <= 0.001 && diferenca >= 0))
+				return false;
+		}
+		return true;
 	}
 	
 	
