@@ -1,12 +1,12 @@
 package principal;
 
-import algortimos.Distancias;
+import algortimos.Classificador;
 import utils.Arquivo;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Distancias calculo = new Distancias(Arquivo.lerArquivo());
+		Classificador calculo = new Classificador(Arquivo.lerArquivo());
 		Arquivo.escrever(calculo.agrupar(4));
 		System.out.println("Done!");
 	}
