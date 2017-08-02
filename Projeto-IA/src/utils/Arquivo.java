@@ -12,9 +12,9 @@ import algortimos.Grupo;
 
 public abstract class Arquivo {
 	
-	public static ArrayList<Integer[]> lerArquivo(){
+	public static ArrayList<Double[]> lerArquivo(){
 		
-		ArrayList<Integer[]> base = new ArrayList<Integer[]>();
+		ArrayList<Double[]> base = new ArrayList<Double[]>();
 		BufferedReader br = null;
 		FileReader fr = null;
 		
@@ -26,7 +26,7 @@ public abstract class Arquivo {
 			while(br.ready()) {
 				currentLine = br.readLine();
 				if(!currentLine.isEmpty()){
-					base.add(Arrays.stream(currentLine.split(",")).mapToInt(Integer::parseInt).boxed().toArray( Integer[]::new ));
+					base.add(Arrays.stream(currentLine.split(",")).map(Double::parseDouble).toArray( Double[]::new ));
 				}
 			}
 		}
@@ -41,7 +41,7 @@ public abstract class Arquivo {
 				e.printStackTrace();
 			}
 		}
-		return base;
+		return normalizar(base);
 	}
 	public static void escrever(ArrayList<Grupo> grupos) {
 		try {
@@ -61,5 +61,30 @@ public abstract class Arquivo {
 			e.printStackTrace();
 		}
 	}
+	public static ArrayList<Double[]> normalizar(ArrayList<Double[]> base){
+		for(int i = 0; i< base.get(0).length;i++){
+			double maior = 0;
+			double menor = 2000000000;
+			//itera toda a coluna j para saber o maior e o menor valor dela
+			for(int j = 0;j < base.size();j++){
+				if(base.get(j)[i] > maior)
+					maior = base.get(j)[i];
+				if(base.get(j)[i] < menor)
+					menor = base.get(j)[i];
+			}
+			//itera novamente a linha J para reatribuir os valores em cada coluna
+			for(int j = 0;j < base.size();j++){
+				if(maior - menor == 0){
+					base.get(j)[i] = 0.0;
+				}
+				else{
+					base.get(j)[i] = ((base.get(j)[i] - menor)/(maior - menor));
+				}
+				
+			}
+		}
+		return base;
+	}
+	
 
 }
