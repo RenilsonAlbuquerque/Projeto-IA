@@ -57,8 +57,8 @@ private ArrayList<Double[]> elementos;
 		//varre cada grupo
 		for(int k = 0; k< grupos.size(); k++ ){
 			Double[] centroide = new Double[grupos.get(k).getCentroide().length];
-			//varre cada i(linha) de atributo 
-			for(int i = 0; i< centroide.length;i++){
+			//varre cada i(linha) de atributo ! começa do 1 porque a primeira linha é o código
+			for(int i = 1; i< centroide.length;i++){
 				double soma = 0;
 				//varre cada atributo por escola sendo j o índice da escola
 				for(int j = 0; j< grupos.get(k).getElementos().size();j++){
@@ -77,13 +77,5 @@ private ArrayList<Double[]> elementos;
 		}
 		return true;
 	}
-	/*
-	public static Double[] convert(Integer[] inteiros){
-		Double[] resultado = new Double[inteiros.length];
-		for(int i = 0; i< inteiros.length;i++){
-			resultado[i] = Double.valueOf(inteiros[i]); 
-		}
-		return resultado;
-	}
-	*/
+
 }

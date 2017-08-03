@@ -4,8 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import algortimos.Grupo;
 
@@ -22,11 +26,20 @@ public abstract class Arquivo {
 			fr = new FileReader("src/arquivos/escolas.txt");
 			br = new BufferedReader(fr);
 			String currentLine;
-
+			double contador = 1;
 			while(br.ready()) {
 				currentLine = br.readLine();
+				
 				if(!currentLine.isEmpty()){
-					base.add(Arrays.stream(currentLine.split(",")).map(Double::parseDouble).toArray( Double[]::new ));
+					Double[] index = new Double[1];
+					index[0] = contador;
+					contador++;
+					base.add(Stream.concat
+							(
+							Arrays.stream(index),
+							Arrays.stream(Arrays.stream(currentLine.split(",")).map(Double::parseDouble).toArray( Double[]::new ))
+							)
+							.toArray(Double[]::new));
 				}
 			}
 		}
@@ -61,8 +74,19 @@ public abstract class Arquivo {
 			e.printStackTrace();
 		}
 	}
+	public static void escreverInformacoes(String frase) {
+		try {
+
+			FileWriter writer = new FileWriter("src/arquivos/escolasSaida.txt", true);
+			writer.write("\n" + frase);
+			writer.write("\n");
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public static ArrayList<Double[]> normalizar(ArrayList<Double[]> base){
-		for(int i = 0; i< base.get(0).length;i++){
+		for(int i = 1; i< base.get(0).length;i++){
 			double maior = 0;
 			double menor = 2000000000;
 			//itera toda a coluna j para saber o maior e o menor valor dela
@@ -72,15 +96,16 @@ public abstract class Arquivo {
 				if(base.get(j)[i] < menor)
 					menor = base.get(j)[i];
 			}
-			//itera novamente a linha J para reatribuir os valores em cada coluna
+			//itera novamente a coluna J para reatribuir os valores em cada coluna
 			for(int j = 0;j < base.size();j++){
 				if(maior - menor == 0){
 					base.get(j)[i] = 0.0;
 				}
-				else{
-					base.get(j)[i] = ((base.get(j)[i] - menor)/(maior - menor));
+				else{					
+					BigDecimal a = new BigDecimal((base.get(j)[i] - menor));
+					BigDecimal b = new BigDecimal((maior - menor));
+					base.get(j)[i] = a.divide(b,MathContext.DECIMAL32).doubleValue();
 				}
-				
 			}
 		}
 		return base;

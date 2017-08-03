@@ -31,7 +31,7 @@ public class Grupo {
 	}
 	public boolean convergenciaParcial(){
 		double indiceDeParada = 0.001f;
-		for(int i = 0; i< this.centroide.length;i++){
+		for(int i = 1; i< this.centroide.length;i++){
 			double diferenca = Math.abs(centroide[i] - centroideAnterior[i]);
 			if(!(diferenca <= indiceDeParada && diferenca >= 0))
 				return false;
