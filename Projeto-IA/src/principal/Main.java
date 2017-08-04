@@ -1,7 +1,7 @@
 package principal;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 
 import algortimos.Classificador;
 import algortimos.Grupo;
@@ -11,20 +11,25 @@ import utils.Arquivo;
 public class Main {
 
 	public static void main(String[] args) {
-		/*ArrayList<Double[]> base = Arquivo.lerArquivo();
+		/*ArrayList<BigDecimal[]> base = Arquivo.lerArquivo();
 		for(int i = 0; i < base.size(); i++){
 			for(int j = 0; j< base.get(i).length; j++ ){
+				System.out.print(base.get(i)[j] + ",");
 			}
 			System.out.print("\n");
 		}*/
-		Date hora = new Date();
-		long a = hora.getTime();
+		Calendar horaInicio = Calendar.getInstance();
+		
 		Classificador calculo = new Classificador(Arquivo.lerArquivo());
 		ArrayList<Grupo> resultado = calculo.agrupar(10);
 		Arquivo.escrever(resultado);
 		Arquivo.escreverInformacoes("Número de Dunn: " + Avaliacao.dunn(resultado));
-		Arquivo.escreverInformacoes("Tempo de compilação:" + (hora.getTime() - a));
-		System.out.println("Done!");
+		Arquivo.escreverInformacoes("Tempo de execução: " + 
+		(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) - horaInicio.get(Calendar.HOUR_OF_DAY)) + ":" +
+		(Calendar.getInstance().get(Calendar.MINUTE) - horaInicio.get(Calendar.MINUTE)) + ":" +
+		(Calendar.getInstance().get(Calendar.SECOND) - horaInicio.get(Calendar.SECOND))
+		);
+		System.out.println("terminou seu babaca!");
 		
 	}
 }

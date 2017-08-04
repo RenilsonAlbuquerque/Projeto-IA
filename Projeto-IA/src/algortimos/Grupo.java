@@ -1,39 +1,43 @@
 package algortimos;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 
 public class Grupo {
 	
-	private ArrayList<Double[]> elementos;
-	private Double[] centroide;
-	private Double[] centroideAnterior;
+	private ArrayList<BigDecimal[]> elementos;
+	private BigDecimal[] centroide;
+	private BigDecimal[] centroideAnterior;
 	
-	public Grupo(Double[] centroide){
+	public Grupo(BigDecimal[] centroide){
 		this.centroide = centroide;
-		this.elementos = new ArrayList<Double[]>();
+		this.elementos = new ArrayList<BigDecimal[]>();
 	}
 
-	public ArrayList<Double[]> getElementos() {
+	public ArrayList<BigDecimal[]> getElementos() {
 		return elementos;
 	}
 
-	public void setElementos(ArrayList<Double[]> elementos) {
+	public void setElementos(ArrayList<BigDecimal[]> elementos) {
 		this.elementos = elementos;
 	}
 
-	public Double[] getCentroide() {
+	public BigDecimal[] getCentroide() {
 		return centroide;
 	}
 
-	public void setCentroide(Double[] centroide) {
+	public void setCentroide(BigDecimal[] centroide) {
 		this.centroideAnterior = this.centroide;
 		this.centroide = centroide;
 	}
 	public boolean convergenciaParcial(){
-		double indiceDeParada = 0.001f;
+		BigDecimal indiceDeParada = new BigDecimal("0.001");
+		BigDecimal zero = new BigDecimal("0.0");
 		for(int i = 1; i< this.centroide.length;i++){
-			double diferenca = Math.abs(centroide[i] - centroideAnterior[i]);
-			if(!(diferenca <= indiceDeParada && diferenca >= 0))
+			
+			BigDecimal diferenca = centroide[i].subtract(centroideAnterior[i],MathContext.DECIMAL32).abs();
+			if(!(diferenca.doubleValue() <= indiceDeParada.doubleValue()     &&  diferenca.doubleValue() >= 0.0))
 				return false;
 		}
 		return true;

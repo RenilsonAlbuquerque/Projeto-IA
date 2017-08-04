@@ -22,8 +22,13 @@ public class Avaliacao {
 					int elementos = (grupos.get(i).getElementos().size() > grupos.get(j).getElementos().size()) 
 							? grupos.get(i).getElementos().size() :  grupos.get(j).getElementos().size(); 
 					
-					BigDecimal a = new BigDecimal(Distancias.euclidiana(grupos.get(i).getCentroide(),grupos.get(j).getCentroide()));
-					dunnAtual = a.divide(BigDecimal.valueOf(elementos), MathContext.DECIMAL32);
+					if(elementos != 0){
+						BigDecimal a = Distancias.euclidiana(grupos.get(i).getCentroide(),grupos.get(j).getCentroide());
+						dunnAtual = a.divide(BigDecimal.valueOf(elementos), MathContext.DECIMAL32);
+					}else{
+						dunnAtual = new BigDecimal("0.0");
+					}
+					
 				}
 			}
 			menorDunn = (dunnAtual.doubleValue() < menorDunn.doubleValue()) ? dunnAtual : menorDunn;
