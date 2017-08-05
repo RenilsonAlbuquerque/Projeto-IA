@@ -33,7 +33,6 @@ public class Grupo {
 	}
 	public boolean convergenciaParcial(){
 		BigDecimal indiceDeParada = new BigDecimal("0.001");
-		BigDecimal zero = new BigDecimal("0.0");
 		for(int i = 1; i< this.centroide.length;i++){
 			
 			BigDecimal diferenca = centroide[i].subtract(centroideAnterior[i],MathContext.DECIMAL32).abs();

@@ -25,9 +25,9 @@ public class Main {
 		Arquivo.escrever(resultado);
 		Arquivo.escreverInformacoes("Número de Dunn: " + Avaliacao.dunn(resultado));
 		Arquivo.escreverInformacoes("Tempo de execução: " + 
-		(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) - horaInicio.get(Calendar.HOUR_OF_DAY)) + ":" +
-		(Calendar.getInstance().get(Calendar.MINUTE) - horaInicio.get(Calendar.MINUTE)) + ":" +
-		(Calendar.getInstance().get(Calendar.SECOND) - horaInicio.get(Calendar.SECOND))
+		Math.abs(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) - horaInicio.get(Calendar.HOUR_OF_DAY)) + ":" +
+		Math.abs(Calendar.getInstance().get(Calendar.MINUTE) - horaInicio.get(Calendar.MINUTE)) + ":" +
+		Math.abs(Calendar.getInstance().get(Calendar.SECOND) - horaInicio.get(Calendar.SECOND))
 		);
 		System.out.println("terminou seu babaca!");
 		

@@ -45,7 +45,7 @@ private ArrayList<BigDecimal[]> elementos;
 			BigDecimal menorDistancia = new BigDecimal("20000.0");
 			int indexMenor = 0;
 			for(int j = 0;j <grupos.size();j++){
-				BigDecimal distancia = Distancias.euclidiana(elementos.get(i),grupos.get(j).getCentroide());
+				BigDecimal distancia = Distancias.manhatam(elementos.get(i),grupos.get(j).getCentroide());
 				if(distancia.compareTo(menorDistancia) <= -1){
 					menorDistancia = distancia;
 					indexMenor = j;

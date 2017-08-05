@@ -32,13 +32,14 @@ public abstract class Arquivo {
 				if(!currentLine.isEmpty()){
 					BigDecimal[] index = new BigDecimal[1];
 					index[0] = contador;
-					contador.plus();
+					
 					base.add(Stream.concat
 							(
 									Arrays.stream(index),
 									Arrays.stream(decimal(currentLine.split(",")))
 							)
 							.toArray(BigDecimal[]::new));
+					contador = contador.add(new BigDecimal("1.0"));
 				}
 			}
 		}
