@@ -13,6 +13,12 @@ private ArrayList<BigDecimal[]> elementos;
 		this.elementos = elementos;
 	}
 	
+	/**
+	 * Executa o loop principal da execução do algorítmo, chama os subprogramas para reagrupar os grupos e 
+	 * redefinir os centróides até os mesmos convergirem.
+	 * @param k - Quantidade de grupos
+	 * @return ArrayList<Grupos> - todos os elementos agrupados em K grupos.
+	 */
 	public ArrayList<Grupo> agrupar(int k){
 		ArrayList<Grupo> grupos = this.gerarGrupos(k, this.elementos);
 		do{
@@ -22,6 +28,13 @@ private ArrayList<BigDecimal[]> elementos;
 		}while(!this.convergencia(grupos));
 		return grupos;
 	}
+	/**
+	 * Gera aleatoriamente K números não repetidos cujos quais serão os índices dos K vetores(elementos) a 
+	 * serem escolhidos como centróides iniciais dos K Grupos gerados. 
+	 * @param k - quantidade de grupos a serem gerados.
+	 * @param elementos - elementos dos quais serão escolhidos os centróides dos grupos.
+	 * @return ArrayList<Grupo>
+	 */
 	private ArrayList<Grupo> gerarGrupos(int k, ArrayList<BigDecimal[]> elementos){
 		Random rand = new Random();
 		ArrayList<Integer> escolhidos = new ArrayList<Integer>(); 
@@ -37,6 +50,13 @@ private ArrayList<BigDecimal[]> elementos;
 		}
 		return resultado;
 	}
+	/**
+	 * Calcula a distância de cada elemento para cada centróide e realoca cada um para o grupo 
+	 * cujo centróide está mais próximo. 
+	 * @param grupos
+	 * @return ArrayList<Grupo> - grupos com os elementos redefinidos com elementos mais próximos dos
+	 * centróides.
+	 */
 	private ArrayList<Grupo> reagrupar(ArrayList<Grupo> grupos){
 		for(Grupo g: grupos)
 			g.getElementos().clear();
@@ -55,6 +75,11 @@ private ArrayList<BigDecimal[]> elementos;
 		}
 		return grupos;
 	}
+	/**
+	 * Gera novos centróides para os grupos calculando o vetor da média dos elementos de cada.
+	 * @param grupos 
+	 * @return ArrayList<Grupo> - grupos com os novos centróides definidos.
+	 */
 	private ArrayList<Grupo> media(ArrayList<Grupo> grupos){
 		//varre cada grupo
 		for(int k = 0; k< grupos.size(); k++ ){
@@ -79,6 +104,11 @@ private ArrayList<BigDecimal[]> elementos;
 		}
 		return grupos;
 	}
+	/**
+	 * Verifica se todos os centróides de todos os grupos convergiram.
+	 * @param grupos
+	 * @return verdadeiro se os grupos convergiram, falso caso contrário.
+	 */
 	private boolean convergencia(ArrayList<Grupo> grupos){
 		for(Grupo g: grupos){
 			if(!g.convergenciaParcial())

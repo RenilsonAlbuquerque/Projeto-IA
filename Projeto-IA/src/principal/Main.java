@@ -11,13 +11,7 @@ import utils.Arquivo;
 public class Main {
 
 	public static void main(String[] args) {
-		/*ArrayList<BigDecimal[]> base = Arquivo.lerArquivo();
-		for(int i = 0; i < base.size(); i++){
-			for(int j = 0; j< base.get(i).length; j++ ){
-				System.out.print(base.get(i)[j] + ",");
-			}
-			System.out.print("\n");
-		}*/
+		
 		Calendar horaInicio = Calendar.getInstance();
 		
 		Classificador calculo = new Classificador(Arquivo.lerArquivo());
@@ -29,7 +23,7 @@ public class Main {
 		Math.abs(Calendar.getInstance().get(Calendar.MINUTE) - horaInicio.get(Calendar.MINUTE)) + ":" +
 		Math.abs(Calendar.getInstance().get(Calendar.SECOND) - horaInicio.get(Calendar.SECOND))
 		);
-		System.out.println("terminou seu babaca!");
+		System.out.println("Done");
 		
 	}
 }

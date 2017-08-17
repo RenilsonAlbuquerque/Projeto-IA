@@ -14,7 +14,12 @@ import algortimos.Grupo;
 
 
 public abstract class Arquivo {
-	
+	/**
+	 * Lê o arquivo especificado e converte cada linha de atributos para um array de BigDecimal com 
+	 * precisão de 7 dígitos.
+	 * @return ArrayList<BigDecimal[]> - coleção de arrays de Big Decimal normalizada onde cada array corresponde ao vetor de
+	 * caracteristicas da escola e cada BigDecimal é um atributo.    
+	 */
 	public static ArrayList<BigDecimal[]> lerArquivo(){
 		
 		ArrayList<BigDecimal[]> base = new ArrayList<BigDecimal[]>();
@@ -84,6 +89,11 @@ public abstract class Arquivo {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * Nomaliza a base de dados lida.
+	 * @param base
+	 * @return ArrayList<BigDecimal> - Base de dados já normalizada com presisão de no maximo 7 dígitos.
+	 */
 	public static ArrayList<BigDecimal[]> normalizar(ArrayList<BigDecimal[]> base){
 		for(int i = 1; i< base.get(0).length;i++){
 			BigDecimal maior = new BigDecimal("0.0");
